@@ -1,0 +1,334 @@
+@font-face {
+  font-family: 'SpoqaHanSansNeo-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  user-select:none;
+  -webkit-user-drag: none;
+  font-size: 12px;
+  box-sizing: border-box;
+  letter-spacing: -1px;
+  font-family: 'SpoqaHanSansNeo-Regular';
+}
+
+body{
+  width: 100vw;
+  height: 100vh;
+  color: #fff;
+}
+
+#viewport{
+  width: inherit;
+  height: inherit;
+
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s opacity;
+}
+
+#viewport.active{
+  opacity: 1;
+  visibility: visible;
+}
+
+#viewport::after{
+  z-index: 1;
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  content: '';
+  animation: bling 0.5s ease-in-out infinite alternate;
+  box-shadow: 0px 0px 50px inset #ff0d00;
+}
+
+@keyframes bling{
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#viewport > #container{
+  position: absolute;
+  z-index: 9;
+  transform: translateX(-50%);
+  width: 320px;
+  left: 50%;
+  top: 20%;
+  text-align: center;
+  opacity: 1;
+  visibility: visible;
+  transition: 500ms opacity;
+}
+
+#viewport > #container.active{
+  opacity: 0;
+  visibility: hidden;
+}
+
+
+#viewport > #container::after{
+  content: "드래그하여 긴급 구조 요청을 합니다.";
+  display: block;
+  margin-top: 10px;
+  font-size: 1.1rem;
+  color: #bbb;
+}
+
+#container > .userName{
+  font-size: 14px;
+  color: #FFFFFF;
+  margin-bottom: 10px;
+}
+
+#container > .userName::after{
+  content: "당신은 치명상을 입었습니다.";
+}
+
+input[type=range] {
+  position: relative;
+   width:100%;
+   height: 62px; 
+   -webkit-appearance: none; 
+   background: transparent; 
+   overflow: hidden;
+   transition: 0.3s all;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+input[type=range]::after{
+  position: absolute;
+  transform: translate(-50%,-50%);
+  left: 55%;
+  top: 50%;
+  font-size: 18px;
+  content: '긴급 구조 요청';
+  font-weight: bold;
+  color: rgb(102, 102, 102);
+  letter-spacing: -1px;
+}
+
+
+input[type=range]::-webkit-slider-runnable-track{
+  width: 100%;
+  border-radius: 50px;
+  height: 62px; 
+}
+
+
+input[type=range]::-webkit-slider-thumb {
+  position: relative;
+  z-index: 999;
+  -webkit-appearance: none;
+  cursor: pointer;
+  width: 62px;
+  height: 62px;   
+  border-radius: 100%;
+  background: #f13e35;
+  background-image: url("./imgs/SOS.svg");
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 40px;
+  box-shadow: -730px 0 0 700px #f13e35;
+}
+
+#container > .box{
+  position: relative;
+  width: 320px;
+  height: 70px;
+  border-radius: 50px;
+  background: rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+}
+
+#container > .box > .inner{
+  position: absolute;
+  transform: translate(-50%,-50%);
+  left: 50%;
+  top: 50%;
+  margin-top: 0.4px;
+  width: calc( 100% - 8px);
+  height: 62px;
+  overflow: hidden;
+  border-radius: 50px;
+}
+
+#notifyWrap{
+  position: absolute;
+  right: 100px;
+  bottom: 10%;
+}
+
+#notifyWrap > .notify{
+  width: 300px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 13px;
+  overflow: hidden;
+  font-size: 13px;
+  color: #222;
+  margin-bottom: 8px;
+  animation-duration: 500ms;
+  animation-fill-mode: backwards;
+}
+
+#notifyWrap > .notify.slideIn{
+  animation-name: scaleAnimation;
+}
+
+#notifyWrap > .notify.slideOut{
+  animation-name: scaleAnimationOut;
+}
+
+
+@keyframes scaleAnimation{
+  from{
+    opacity: 0;
+    transform: scale(0);
+  }
+  to{
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleAnimationOut{
+  from{
+    opacity: 1;
+    transform: scale(1);
+  }
+  to{
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+#notifyWrap > .notify > .notifyHeader{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 20px;
+  margin-top: 8px;
+  font-weight: bold;
+}
+
+#notifyWrap > .notify > .notifyHeader > .Logo{
+  width: 20px;
+  height: 20px;
+  background-image: url("https://cdn.discordapp.com/attachments/816029297768005712/1005446235974553661/unknown.png");
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 100%;
+  border-radius: 4px;
+  margin-left: 8px;
+  margin-right: 4px;
+}
+
+#notifyWrap > .notify > .notifyHeader > .headerName{
+  display: flex;
+  width: 100%;
+}
+
+#notifyWrap > .notify > .notifyHeader > .headerName::after{
+  margin-left: auto;
+  margin-right: 8px;
+  content: "지금";
+}
+
+#notifyWrap > .notify > .notifyContent{
+  margin: 4px 0 6px 0;
+  padding: 0 8px;
+  width: inherit;
+  min-height: calc( 100% - 28px);
+}
+
+#notifyWrap > .notify > .notifyContent > #message{
+  line-height: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+#notifyWrap > .notify > .notifyContent > #message::before{
+  display: block;
+  content: "[Web발신]";
+}
+
+#buttonEvent{
+  position: absolute;
+  /* display: flex; */
+  z-index: 99 ;
+  left: 20px;
+  bottom: 20px;
+  padding: 5px;
+  border-radius: 5px;
+  
+  display: none;
+}
+
+#buttonEvent.active{
+  display: flex;
+}
+
+#buttonEvent > div {
+  position: relative;
+  width: 90px;
+  height: 30px;
+  line-height: 30px;
+  font-weight: bold;
+  margin: 5px;
+  color: #222;
+  background-color: #fff;
+  box-shadow: 0 0 5px #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+#buttonEvent > div > .disabled{
+  display: none;
+  position: absolute; 
+  left: 0;
+  top: 0;
+  width: inherit;
+  height: inherit;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#buttonEvent > div > .disabled.active{
+  display: block;
+}
+
+#buttonEvent > div::before{
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 10px;
+  width: 18px;
+  height: 18px;
+}
+
+#buttonEvent > #userDeath::before{
+  background : url("./imgs/death.svg")
+}
+
+#buttonEvent > #teamLose::before{
+  background : url("./imgs/lose.svg")
+}
+
+#buttonEvent > #teamstop::before{
+  background : url("./imgs/stop.svg")
+}
+
+
